@@ -7,7 +7,7 @@
     "start": "node src/main",
     "test": "jest",
     "test-jenkins": "jest --reporters=default --reporters=jest-junit",
-    "coverage-jenkins": "jest --reporters=default --reporters=jest-junit --coverage --coverageReporters=text --coverageReporters=html --coverageDirectory=./coverage/",
+    "coverage-jenkins": "jest --reporters=default --reporters=jest-junit --coverage --coverageReporters=text --coverageReporters=html --coverageReporters=lcov --coverageDirectory=./coverage/",
     "lint": "eslint src/**/*.js -f checkstyle -o coverage/eslint-result.xml",
     "lint:json": "eslint src/**/*.js --format json -o coverage/eslint-result.json"
   },
