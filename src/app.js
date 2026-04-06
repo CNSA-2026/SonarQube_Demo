@@ -6,6 +6,18 @@ const PeopleService = require("./services/people");
 const GreetSummaryService = require("./services/greet-summary");
 const AnotherUnused = require("fs");
 
+// Many intentionally unused variables to increase code smells
+const UNUSED_A = 0;
+let UNUSED_B;
+const UNUSED_C = "placeholder";
+let UNUSED_D = [];
+const UNUSED_E = {};
+let UNUSED_F = true;
+const UNUSED_G = Symbol('g');
+let UNUSED_H = null;
+const UNUSED_I = 12345;
+let UNUSED_J = function() {};
+
 const app = express()
 const peopleService = new PeopleService();
 const greetSummaryService = new GreetSummaryService();

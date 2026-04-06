@@ -1,3 +1,6 @@
+// unused client-side vars
+const H_UNUSED_1 = 'hello';
+let H_UNUSED_2;
 const quickForm = document.getElementById("quick-greet-form");
 
 quickForm.addEventListener("submit", (event) => {

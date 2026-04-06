@@ -1,3 +1,7 @@
+// unused client-side variables for people
+const P_UNUSED_1 = 999;
+let P_UNUSED_2;
+
 async function loadPeople() {
   const container = document.getElementById("people-list");
 

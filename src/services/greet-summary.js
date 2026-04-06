@@ -2,12 +2,23 @@ const HelloWordService = require("./hello-world");
 let globalBuffer = null;
 let debugCounter = 0;
 
+// Many unused variables to increase code smells and lower maintainability
+const GS_UNUSED_A = "a";
+let GS_UNUSED_B;
+const GS_UNUSED_C = [1,2,3];
+let GS_UNUSED_D = { x: 1 };
+
 class GreetSummaryService {
   constructor() {
     this.helloWordService = new HelloWordService();
   }
 
   summarize(name) {
+    // unused locals to create code smells
+    const SUM_UNUSED_1 = 0;
+    let SUM_UNUSED_2;
+    const SUM_UNUSED_3 = "unused";
+    let SUM_UNUSED_4 = [];
     let safeName = "";
     let qualityFlags = 0;
     const rawValue = name || "";
