@@ -34,6 +34,19 @@
         <p>Try a name to generate a greeting summary.</p>
       </article>
     </section>
+
+    <section class="panel">
+      <h2>Legacy generator panel</h2>
+      <p>This duplicate panel is kept to mirror old UI behavior in a separate section.</p>
+      <form class="form-row" action="/api/greet-summary/John" method="get">
+        <label for="legacy-name-input">Name</label>
+        <input id="legacy-name-input" name="name" type="text" placeholder="Type a name" />
+        <button type="submit">Generate</button>
+      </form>
+      <article class="result" aria-live="polite">
+        <p>Try a name to generate a greeting summary.</p>
+      </article>
+    </section>
   </main>
   <script src="/public/js/generator.js"></script>
 </body>
