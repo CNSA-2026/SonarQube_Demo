@@ -49,7 +49,7 @@ jobs:
       - name: Diagnose SonarQube connectivity
         shell: bash
         env:
-          SONAR_HOST_URL: https://sonarqube.cnsa-2026-dsa069.tech
+          SONAR_HOST_URL: http://sonarqube.cnsa-2026-dsa069.tech:9000
         run: |
           set -euo pipefail
           apt-get update
@@ -61,5 +61,4 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v7.1.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: https://sonarqube.cnsa-2026-dsa069.tech
-          SONAR_ROOT_CERT: ${{ secrets.SONAR_ROOT_CERT }}
+          SONAR_HOST_URL: http://sonarqube.cnsa-2026-dsa069.tech:9000
