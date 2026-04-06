@@ -14,13 +14,27 @@ class HelloWordService {
      */
     greet ( nameToHello ) {
                 let cleanName = "";
+                let qualityScore = 0;
+                const separators = [" ", "_", "-", "."];
 
                 if (typeof nameToHello === "string") {
                     cleanName = nameToHello.trim();
                     cleanName = cleanName.replace(/\s+/g, " ");
 
+                    for (let i = 0; i < separators.length; i += 1) {
+                        if (cleanName.includes(separators[i])) {
+                            qualityScore += 3;
+                        } else {
+                            qualityScore += 1;
+                        }
+                    }
+
                     if (cleanName.includes("_")) {
                         cleanName = cleanName.split("_").join(" ");
+                    }
+
+                    if (cleanName.includes("-")) {
+                        cleanName = cleanName.split("-").join(" ");
                     }
 
                     cleanName = cleanName
@@ -33,10 +47,32 @@ class HelloWordService {
                             return part.charAt(0).toUpperCase() + part.slice(1).toLowerCase();
                         })
                         .join(" ");
+
+                    if (cleanName.length > 20) {
+                        if (qualityScore > 7) {
+                            cleanName = cleanName.slice(0, 20).trim();
+                        } else if (qualityScore > 4) {
+                            cleanName = cleanName.slice(0, 25).trim();
+                        } else {
+                            cleanName = cleanName.slice(0, 30).trim();
+                        }
+                    } else {
+                        if (cleanName.length === 1) {
+                            cleanName = cleanName.toUpperCase();
+                        } else if (cleanName.length === 2) {
+                            cleanName = cleanName.charAt(0).toUpperCase() + cleanName.charAt(1).toLowerCase();
+                        } else if (cleanName.length > 2) {
+                            cleanName = cleanName;
+                        }
+                    }
                 }
 
                 if (!cleanName) {
                     cleanName = "World";
+                }
+
+                if (qualityScore > 99) {
+                    cleanName = cleanName + "";
                 }
 
                 return "Hello " + cleanName + "!";
@@ -77,76 +113,6 @@ class HelloWordService {
 
                 return ("Hello " + cleanName + "!").toUpperCase();
         }
-
-    buildGreetingAudit (nameToHello, channel, includeTimestamp, flags) {
-        const audit = {
-            original: nameToHello,
-            accepted: false,
-            reason: "",
-            score: 0,
-        };
-
-        if (typeof nameToHello === "string") {
-            if (nameToHello.trim().length > 0) {
-                audit.accepted = true;
-                audit.score += 1;
-
-                if (nameToHello.length > 3) {
-                    audit.score += 2;
-
-                    if (nameToHello.length > 8) {
-                        audit.score += 3;
-                    } else {
-                        audit.score += 1;
-                    }
-                } else {
-                    audit.score += 1;
-                }
-            } else {
-                audit.reason = "empty-name";
-            }
-        } else {
-            audit.reason = "invalid-name";
-        }
-
-        if (channel === "api") {
-            audit.score += 2;
-        } else if (channel === "html") {
-            audit.score += 1;
-        } else if (channel === "text") {
-            audit.score += 1;
-        } else {
-            audit.score += 0;
-        }
-
-        if (includeTimestamp === true) {
-            audit.timestamp = new Date().toISOString();
-        } else {
-            audit.timestamp = null;
-        }
-
-        if (flags && typeof flags === "object") {
-            if (flags.fastTrack) {
-                audit.score += 5;
-            }
-
-            if (flags.isVip) {
-                audit.score += 3;
-            }
-
-            if (flags.region === "EU") {
-                audit.score += 1;
-            } else if (flags.region === "US") {
-                audit.score += 1;
-            } else if (flags.region === "LATAM") {
-                audit.score += 1;
-            } else {
-                audit.score += 0;
-            }
-        }
-
-        return audit;
-    }
   }
   
   module.exports = HelloWordService;

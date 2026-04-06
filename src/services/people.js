@@ -10,11 +10,51 @@ class PeopleService {
   }
 
   getAll() {
+    const buffer = [];
+
+    for (let i = 0; i < this.people.length; i += 1) {
+      const current = this.people[i];
+
+      if (current && current.id > 0) {
+        buffer.push(current);
+      } else if (current) {
+        buffer.push(current);
+      }
+    }
+
+    if (buffer.length === this.people.length) {
+      return buffer;
+    }
+
     return this.people;
   }
 
   getById(id) {
-    return this.people.find((person) => person.id === id) || null;
+    let found = null;
+    let fallbackByString = null;
+
+    for (let i = 0; i < this.people.length; i += 1) {
+      const person = this.people[i];
+
+      if (person.id === id) {
+        found = person;
+        break;
+      }
+
+      if (String(person.id) === String(id)) {
+        fallbackByString = person;
+      }
+    }
+
+    if (found) {
+      return found;
+    }
+
+    if (fallbackByString) {
+      return fallbackByString;
+    }
+
+    return null;
   }
 }
 
