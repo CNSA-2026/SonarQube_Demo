@@ -19,9 +19,24 @@ describe("GET /", () => {
 });
 
 describe("GET /John", () => {
-    //navigate to /John and check the the response is "Hello John!"
-    it('responds with "Hello John!"', (done) => { 
-        request(app).get('/John').expect('Hello John!', done);
+    it("responds with styled greeting HTML", (done) => {
+        request(app)
+            .get('/John')
+            .expect(200)
+            .expect("Content-Type", /html/)
+            .expect((res) => {
+                expect(res.text).toContain("Greeting Spotlight");
+                expect(res.text).toContain("Hello John!");
+            })
+            .end(done);
+    });
+
+    it("supports plain text response when requested", (done) => {
+        request(app)
+            .get('/John?format=text')
+            .expect(200)
+            .expect("Content-Type", /text/)
+            .expect('Hello John!', done);
     });
 });
 

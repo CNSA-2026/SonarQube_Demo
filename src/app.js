@@ -10,6 +10,15 @@ const greetSummaryService = new GreetSummaryService();
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'hello.html'));
 })
@@ -57,7 +66,48 @@ app.get('/api/greet-summary/:name', (req, res) => {
 });
 
 app.get('/:nameToSalute', (req, res) => {
-  res.send(new HelloWordService().greet(req.params.nameToSalute));
+  const rawName = req.params.nameToSalute;
+  const safeName = escapeHtml(rawName);
+  const greeting = new HelloWordService().greet(rawName);
+
+  if (req.query.format === 'text') {
+    return res.type('text/plain').send(greeting);
+  }
+
+  return res.type('html').send(`<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Greeting Lab | ${safeName}</title>
+  <link rel="stylesheet" href="/public/css/theme.css" />
+</head>
+<body>
+  <main class="page shell">
+    <header class="site-header">
+      <a class="brand" href="/">Greeting Lab</a>
+      <nav class="nav-row">
+        <a href="/">Home</a>
+        <a href="/views/dashboard">Dashboard</a>
+        <a href="/views/people">People</a>
+        <a href="/views/generator">Generator</a>
+      </nav>
+    </header>
+
+    <header class="hero compact">
+      <p class="eyebrow">Classic Greeting</p>
+      <h1>Greeting Spotlight</h1>
+      <p class="subtitle">A dedicated visual page for your original hello route.</p>
+    </header>
+
+    <section class="panel">
+      <h2>Hello ${safeName}!</h2>
+      <p><strong>Generated greeting:</strong> ${escapeHtml(greeting)}</p>
+      <p class="hero-note">Tip: You can also call <code>/${safeName}?format=text</code> for plain text output.</p>
+    </section>
+  </main>
+</body>
+</html>`);
 })
 
 module.exports = app
