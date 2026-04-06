@@ -46,7 +46,6 @@ jobs:
       #     repo-token: "${{ secrets.GITHUB_TOKEN }}" 
       #     report-json: "./coverage/eslint-result.json"
       
-
       - name: Diagnose SonarQube connectivity
         env:
           SONAR_HOST_URL: https://sonarqube.cnsa-2026-dsa069.tech
