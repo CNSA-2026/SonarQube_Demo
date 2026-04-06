@@ -1,4 +1,4 @@
-const { executeUserCode } = require('./server-eval-sample');
+const { executeUserCode } = require('../services/security-service');
 
 describe('server-eval-sample', () => {
   test('executes simple expression via eval (vulnerable)', () => {

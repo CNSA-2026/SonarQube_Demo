@@ -1,4 +1,4 @@
-const { generateToken } = require('./insecure-random-sample');
+const { generateToken } = require('../services/security-service');
 
 describe('insecure-random-sample', () => {
   test('generates token using Math.random (insecure)', () => {

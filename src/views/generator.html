@@ -1,53 +1,73 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Greeting Lab | Generator</title>
-  <link rel="stylesheet" href="/public/css/theme.css" />
-</head>
-<body>
-  <main class="page shell">
-    <header class="site-header">
-      <a class="brand" href="/">Greeting Lab</a>
-      <nav class="nav-row">
-        <a href="/">Home</a>
-        <a href="/views/dashboard">Dashboard</a>
-        <a href="/views/people">People</a>
-      </nav>
-    </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Greeting Lab | Generator</title>
+    <link rel="stylesheet" href="/public/css/theme.css" />
+  </head>
+  <body>
+    <main class="page shell">
+      <header class="site-header">
+        <a class="brand" href="/">Greeting Lab</a>
+        <nav class="nav-row">
+          <a href="/">Home</a>
+          <a href="/views/dashboard">Dashboard</a>
+          <a href="/views/people">People</a>
+          <a href="/views/security">Security</a>
+        </nav>
+      </header>
 
-    <header class="hero compact">
-      <p class="eyebrow">Generator</p>
-      <h1>Greeting Builder</h1>
-      <p class="subtitle">Create a greeting and inspect response metadata instantly.</p>
-      <p class="hero-note">Powered by <code>/api/greet-summary/:name</code> so you can verify API responses visually.</p>
-    </header>
+      <header class="hero compact">
+        <p class="eyebrow">Generator</p>
+        <h1>Greeting Builder</h1>
+        <p class="subtitle">
+          Create a greeting and inspect response metadata instantly.
+        </p>
+        <p class="hero-note">
+          Powered by <code>/api/greet-summary/:name</code> so you can verify API
+          responses visually.
+        </p>
+      </header>
 
-    <section class="panel">
-      <form id="greet-form" class="form-row">
-        <label for="name-input">Name</label>
-        <input id="name-input" name="name" type="text" placeholder="Type a name" required />
-        <button type="submit">Generate</button>
-      </form>
-      <article id="greet-result" class="result" aria-live="polite">
-        <p>Try a name to generate a greeting summary.</p>
-      </article>
-    </section>
+      <section class="panel">
+        <form id="greet-form" class="form-row">
+          <label for="name-input">Name</label>
+          <input
+            id="name-input"
+            name="name"
+            type="text"
+            placeholder="Type a name"
+            required
+          />
+          <button type="submit">Generate</button>
+        </form>
+        <article id="greet-result" class="result" aria-live="polite">
+          <p>Try a name to generate a greeting summary.</p>
+        </article>
+      </section>
 
-    <section class="panel">
-      <h2>Legacy generator panel</h2>
-      <p>This duplicate panel is kept to mirror old UI behavior in a separate section.</p>
-      <form class="form-row" action="/api/greet-summary/John" method="get">
-        <label for="legacy-name-input">Name</label>
-        <input id="legacy-name-input" name="name" type="text" placeholder="Type a name" />
-        <button type="submit">Generate</button>
-      </form>
-      <article class="result" aria-live="polite">
-        <p>Try a name to generate a greeting summary.</p>
-      </article>
-    </section>
-  </main>
-  <script src="/public/js/generator.js"></script>
-</body>
+      <section class="panel">
+        <h2>Legacy generator panel</h2>
+        <p>
+          This duplicate panel is kept to mirror old UI behavior in a separate
+          section.
+        </p>
+        <form class="form-row" action="/api/greet-summary/John" method="get">
+          <label for="legacy-name-input">Name</label>
+          <input
+            id="legacy-name-input"
+            name="name"
+            type="text"
+            placeholder="Type a name"
+          />
+          <button type="submit">Generate</button>
+        </form>
+        <article class="result" aria-live="polite">
+          <p>Try a name to generate a greeting summary.</p>
+        </article>
+      </section>
+    </main>
+    <script src="/public/js/generator.js"></script>
+  </body>
 </html>

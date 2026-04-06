@@ -1,33 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Greeting Lab | People</title>
-  <link rel="stylesheet" href="/public/css/theme.css" />
-</head>
-<body>
-  <main class="page shell">
-    <header class="site-header">
-      <a class="brand" href="/">Greeting Lab</a>
-      <nav class="nav-row">
-        <a href="/">Home</a>
-        <a href="/views/dashboard">Dashboard</a>
-        <a href="/views/generator">Generator</a>
-      </nav>
-    </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Greeting Lab | People</title>
+    <link rel="stylesheet" href="/public/css/theme.css" />
+  </head>
+  <body>
+    <main class="page shell">
+      <header class="site-header">
+        <a class="brand" href="/">Greeting Lab</a>
+        <nav class="nav-row">
+          <a href="/">Home</a>
+          <a href="/views/dashboard">Dashboard</a>
+          <a href="/views/generator">Generator</a>
+          <a href="/views/security">Security</a>
+        </nav>
+      </header>
 
-    <header class="hero compact">
-      <p class="eyebrow">Directory</p>
-      <h1>People View</h1>
-      <p class="subtitle">Data loaded from <code>/api/people</code>.</p>
-      <p class="hero-note">Cards are fetched from the backend in real time.</p>
-    </header>
+      <header class="hero compact">
+        <p class="eyebrow">Directory</p>
+        <h1>People View</h1>
+        <p class="subtitle">Data loaded from <code>/api/people</code>.</p>
+        <p class="hero-note">
+          Cards are fetched from the backend in real time.
+        </p>
+      </header>
 
-    <section>
-      <div id="people-list" class="grid cards"></div>
-    </section>
-  </main>
-  <script src="/public/js/people.js"></script>
-</body>
+      <section>
+        <div id="people-list" class="grid cards"></div>
+      </section>
+    </main>
+    <script src="/public/js/people.js"></script>
+  </body>
 </html>

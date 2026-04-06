@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Security Lab</title>
+    <link rel="stylesheet" href="/public/css/theme.css" />
+  </head>
+  <body>
+    <main class="page shell">
+      <header class="site-header">
+        <a class="brand" href="/">Greeting Lab</a>
+        <nav class="nav-row">
+          <a href="/">Home</a>
+          <a href="/views/dashboard">Dashboard</a>
+          <a href="/views/people">People</a>
+          <a href="/views/generator">Generator</a>
+        </nav>
+      </header>
+
+      <header class="hero compact">
+        <p class="eyebrow">Security Demos</p>
+        <h1>Interact with security samples</h1>
+        <p class="subtitle">Educational endpoints showing insecure patterns.</p>
+      </header>
+
+      <section class="panel">
+        <h2>Hash Password (MD5)</h2>
+        <form id="hash-form">
+          <input name="password" placeholder="password" />
+          <button type="submit">Hash</button>
+        </form>
+        <div id="hash-result"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Generate Token (Math.random)</h2>
+        <button id="gen-token">Generate Token</button>
+        <div id="token-result"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Sign JWT</h2>
+        <form id="jwt-form">
+          <input name="sub" placeholder="sub (subject)" />
+          <button type="submit">Sign</button>
+        </form>
+        <div id="jwt-result"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Execute Code (eval)</h2>
+        <form id="eval-form">
+          <input name="code" placeholder="1 + 2" />
+          <button type="submit">Execute</button>
+        </form>
+        <div id="eval-result"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Encrypt (AES-128-ECB)</h2>
+        <form id="enc-form">
+          <input name="text" placeholder="text to encrypt" />
+          <button type="submit">Encrypt</button>
+        </form>
+        <div id="enc-result"></div>
+      </section>
+    </main>
+    <script src="/public/js/security.js"></script>
+  </body>
+</html>

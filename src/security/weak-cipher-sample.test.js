@@ -1,4 +1,4 @@
-const { encryptECB } = require('./weak-cipher-sample');
+const { encryptECB } = require('../services/security-service');
 
 describe('weak-cipher-sample', () => {
   test('encrypts using AES-128-ECB (weak pattern)', () => {

@@ -1,4 +1,4 @@
-const { hashPasswordMD5 } = require('./insecure-crypto-sample');
+const { hashPasswordMD5 } = require('../services/security-service');
 
 describe('insecure-crypto-sample', () => {
   test('hashes with MD5 (weak)', () => {
