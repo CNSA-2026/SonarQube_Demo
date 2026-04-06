@@ -10,55 +10,35 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: node:20-bookworm
+    container: node:16-alpine
 
     steps:
       - uses: actions/checkout@v6.0.2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Test
+        uses: mattallty/jest-github-action@v1.0.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          # Disabling shallow clones is recommended for improving the relevancy of reporting
-          fetch-depth: 0
+          test-command: "npm run coverage-jenkins"
 
-      # - name: Install dependencies
-      #   run: npm install
+      - uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: test-results
+          path: |
+            ./coverage/test.results.xml
+            ./coverage/
 
-      # - name: Test
-      #   uses: mattallty/jest-github-action@v1.0.3
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     test-command: "npm run coverage-jenkins"
+      - name: Save Code Linting Report JSON
+        run: npm run lint:json
+        continue-on-error: true 
 
-      # - uses: actions/upload-artifact@v4
-      #   if: success() || failure()
-      #   with:
-      #     name: test-results
-      #     path: |
-      #       ./coverage/test.results.xml
-      #       ./coverage/
-
-      # - name: Save Code Linting Report JSON
-      #   run: npm run lint:json
-      #   continue-on-error: true 
-
-      # - name: Annotate Code Linting Results
-      #   uses: ataylorme/eslint-annotate-action@3.0.0
-      #   with:
-      #     repo-token: "${{ secrets.GITHUB_TOKEN }}" 
-      #     report-json: "./coverage/eslint-result.json"
-      
-      - name: Diagnose SonarQube connectivity
-        shell: bash
-        env:
-          SONAR_HOST_URL: http://sonarqube.cnsa-2026-dsa069.tech:9000
-        run: |
-          set -euo pipefail
-          apt-get update
-          apt-get install -y curl ca-certificates
-          echo "Checking ${SONAR_HOST_URL}/api/system/status"
-          curl --fail --show-error --silent --location "${SONAR_HOST_URL}/api/system/status"
-
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v7.1.0
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: http://sonarqube.cnsa-2026-dsa069.tech:9000
+      - name: Annotate Code Linting Results
+        uses: ataylorme/eslint-annotate-action@3.0.0
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}" 
+          report-json: "./coverage/eslint-result.json" 
