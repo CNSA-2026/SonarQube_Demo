@@ -1,0 +1,170 @@
+:root {
+  --bg-1: #f8f4e8;
+  --bg-2: #d9f1ff;
+  --ink: #1b1f3b;
+  --accent-1: #ff7a59;
+  --accent-2: #009688;
+  --card: rgba(255, 255, 255, 0.78);
+  --shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 122, 89, 0.3), transparent 40%),
+    radial-gradient(circle at 80% 10%, rgba(0, 150, 136, 0.3), transparent 38%),
+    linear-gradient(140deg, var(--bg-1), var(--bg-2));
+}
+
+.page {
+  animation: rise 500ms ease;
+}
+
+.shell {
+  width: min(1000px, 92vw);
+  margin: 0 auto;
+  padding: 2rem 0 3rem;
+}
+
+.hero h1 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.eyebrow {
+  margin: 0;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--accent-2);
+}
+
+.subtitle {
+  max-width: 65ch;
+}
+
+.compact {
+  margin-bottom: 1.4rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.cards {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid rgba(27, 31, 59, 0.1);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  color: inherit;
+  display: block;
+  padding: 1rem;
+  text-decoration: none;
+  transform: translateY(10px);
+  opacity: 0;
+  animation: fadeSlide 450ms ease forwards;
+}
+
+.card:nth-child(2) {
+  animation-delay: 80ms;
+}
+
+.card:nth-child(3) {
+  animation-delay: 140ms;
+}
+
+.card:hover {
+  border-color: var(--accent-1);
+}
+
+.nav-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.nav-row a {
+  background: #ffffff;
+  border: 1px solid rgba(27, 31, 59, 0.15);
+  border-radius: 999px;
+  color: var(--ink);
+  padding: 0.45rem 0.8rem;
+  text-decoration: none;
+}
+
+.panel {
+  background: var(--card);
+  border: 1px solid rgba(27, 31, 59, 0.12);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 1rem;
+}
+
+.form-row {
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: 1fr;
+}
+
+input,
+button {
+  border: 1px solid rgba(27, 31, 59, 0.2);
+  border-radius: 10px;
+  font: inherit;
+  padding: 0.65rem 0.75rem;
+}
+
+button {
+  background: linear-gradient(90deg, var(--accent-1), #ffc145);
+  border: none;
+  color: #111;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.result {
+  margin-top: 1rem;
+  min-height: 64px;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlide {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .shell {
+    width: min(1000px, 94vw);
+    padding-top: 1.3rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.65rem, 6vw, 2.2rem);
+  }
+}
