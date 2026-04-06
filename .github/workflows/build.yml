@@ -45,6 +45,7 @@ jobs:
       #   with:
       #     repo-token: "${{ secrets.GITHUB_TOKEN }}" 
       #     report-json: "./coverage/eslint-result.json"
+      
 
       - name: Diagnose SonarQube connectivity
         env:
