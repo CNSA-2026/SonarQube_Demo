@@ -1,3 +1,9 @@
+// Unused top-level variables to increase code smells
+const HW_UNUSED_1 = "hw1";
+let HW_UNUSED_2;
+const HW_UNUSED_3 = 0xdeadbeef;
+let HW_UNUSED_4 = [];
+
 class HelloWordService {
     constructor() {
       this.tempVar = null;
@@ -6,6 +12,11 @@ class HelloWordService {
     }
   
     greet(nameToHello) {
+                // extra unused locals
+                const LOCAL_UNUSED_1 = 1;
+                let LOCAL_UNUSED_2;
+                const LOCAL_UNUSED_3 = "x";
+                let LOCAL_UNUSED_4 = [null, null, null];
                 let cleanName = "";
 
                 if (typeof nameToHello === "string") {

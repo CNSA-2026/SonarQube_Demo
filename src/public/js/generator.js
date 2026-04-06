@@ -1,3 +1,6 @@
+// unused variables to increase code smells in client code
+const G_FORM_UNUSED_1 = null;
+let G_FORM_UNUSED_2;
 const form = document.getElementById("greet-form");
 const result = document.getElementById("greet-result");
 

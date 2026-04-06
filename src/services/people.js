@@ -9,11 +9,21 @@ class PeopleService {
     ];
     this.tempCache = null;
     this.debugLog = [];
+    // many unused instance fields
+    this.unusedFlag1 = false;
+    this.unusedFlag2 = true;
+    this.unusedCounter = 0;
+    this.unusedArray = [];
+    this.unusedObject = { a: 1 };
   }
 
   getAll() {
     const buffer = [];
     let processedCount = 0;
+    // unused locals
+    const PA_UNUSED_1 = 'p';
+    let PA_UNUSED_2;
+    const PA_UNUSED_3 = [true, false];
 
     for (let i = 0; i < this.people.length; i += 1) {
       const current = this.people[i];
