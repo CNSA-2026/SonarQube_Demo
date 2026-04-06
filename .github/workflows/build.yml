@@ -47,6 +47,7 @@ jobs:
       #     report-json: "./coverage/eslint-result.json"
       
       - name: Diagnose SonarQube connectivity
+        shell: bash
         env:
           SONAR_HOST_URL: https://sonarqube.cnsa-2026-dsa069.tech
         run: |
