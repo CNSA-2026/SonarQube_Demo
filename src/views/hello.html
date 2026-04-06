@@ -8,15 +8,20 @@
 </head>
 <body>
   <main class="page shell">
-    <header class="hero">
-      <p class="eyebrow">Welcome</p>
-      <h1>Hello World, now with style</h1>
-      <p class="subtitle">This is your upgraded landing page with clear navigation and quick actions.</p>
+    <header class="site-header">
+      <a class="brand" href="/">Greeting Lab</a>
       <nav class="nav-row">
         <a href="/views/dashboard">Dashboard</a>
         <a href="/views/people">People</a>
         <a href="/views/generator">Generator</a>
       </nav>
+    </header>
+
+    <header class="hero">
+      <p class="eyebrow">Welcome</p>
+      <h1>Hello World, now with style</h1>
+      <p class="subtitle">This is your upgraded landing page with clear navigation and quick actions.</p>
+      <p class="hero-note">Now you can browse views, inspect APIs, and generate greetings from a single flow.</p>
     </header>
 
     <section class="panel">
@@ -33,14 +38,17 @@
       <a class="card" href="/views/dashboard">
         <h3>Explore views</h3>
         <p>Navigate through the new visual sections.</p>
+        <span class="link-hint">Open dashboard</span>
       </a>
       <a class="card" href="/api/people">
         <h3>Check API</h3>
         <p>See JSON data served by the backend.</p>
+        <span class="link-hint">Open /api/people</span>
       </a>
       <a class="card" href="/John">
         <h3>Classic hello</h3>
         <p>Open the original route instantly.</p>
+        <span class="link-hint">Open /John</span>
       </a>
     </section>
   </main>
