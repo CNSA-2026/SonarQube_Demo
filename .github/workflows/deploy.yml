@@ -1,0 +1,29 @@
+name: Deploy
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2.8.0
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }} 
+          #Valor del known_hosts de la máquina a la que nos conectamos. Metemos un valor de ejemplo para calcularlo dinámicamente en pasos posteriores.
+          known_hosts: 'un-valor-para-que-no-de-error'
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      - name: Deploy
+        run: |
+          ssh ubuntu@${{ secrets.SSH_HOST }} "if [ ! -d 'hello-node-action' ]; then \
+              git clone https://github.com/CNSA-2026/hello-node-action.git; \
+            else \
+              cd hello-node-action && git stash && git fetch --all && git reset --hard origin/main && git pull origin main; \
+            fi"
+          ssh ubuntu@${{ secrets.SSH_HOST }} "if pgrep node; then forever stopall; fi"
+          ssh ubuntu@${{ secrets.SSH_HOST }} "cd hello-node-action && npm install"
+          ssh ubuntu@${{ secrets.SSH_HOST }} "cd hello-node-action && forever start src/main.js"
+        

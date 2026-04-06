@@ -1,0 +1,16 @@
+name: 'Test Report'
+on:
+  workflow_run:
+    workflows: ['CI'] # Se ejecuta cuando se completa el flujo llamado CI
+    types:
+      - completed
+jobs:
+  report:
+    runs-on: ubuntu-latest 
+    steps:
+    - uses: dorny/test-reporter@v2.6.0
+      with:
+        artifact: test-results # Hacemos referencia al artefacto con los test creado en el build
+        name: JEST Tests                    
+        path: 'test.results.xml'            
+        reporter: jest-junit                
