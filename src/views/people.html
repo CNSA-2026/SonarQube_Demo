@@ -8,14 +8,20 @@
 </head>
 <body>
   <main class="page shell">
+    <header class="site-header">
+      <a class="brand" href="/">Greeting Lab</a>
+      <nav class="nav-row">
+        <a href="/">Home</a>
+        <a href="/views/dashboard">Dashboard</a>
+        <a href="/views/generator">Generator</a>
+      </nav>
+    </header>
+
     <header class="hero compact">
       <p class="eyebrow">Directory</p>
       <h1>People View</h1>
       <p class="subtitle">Data loaded from <code>/api/people</code>.</p>
-      <nav class="nav-row">
-        <a href="/views/dashboard">Dashboard</a>
-        <a href="/views/generator">Generator</a>
-      </nav>
+      <p class="hero-note">Cards are fetched from the backend in real time.</p>
     </header>
 
     <section>

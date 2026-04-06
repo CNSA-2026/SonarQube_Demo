@@ -8,14 +8,20 @@
 </head>
 <body>
   <main class="page shell">
+    <header class="site-header">
+      <a class="brand" href="/">Greeting Lab</a>
+      <nav class="nav-row">
+        <a href="/">Home</a>
+        <a href="/views/dashboard">Dashboard</a>
+        <a href="/views/people">People</a>
+      </nav>
+    </header>
+
     <header class="hero compact">
       <p class="eyebrow">Generator</p>
       <h1>Greeting Builder</h1>
       <p class="subtitle">Create a greeting and inspect response metadata instantly.</p>
-      <nav class="nav-row">
-        <a href="/views/dashboard">Dashboard</a>
-        <a href="/views/people">People</a>
-      </nav>
+      <p class="hero-note">Powered by <code>/api/greet-summary/:name</code> so you can verify API responses visually.</p>
     </header>
 
     <section class="panel">
