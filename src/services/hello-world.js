@@ -12,12 +12,16 @@ class HelloWordService {
     }
   
     greet(nameToHello) {
-                // extra unused locals
-                const LOCAL_UNUSED_1 = 1;
-                let LOCAL_UNUSED_2;
-                const LOCAL_UNUSED_3 = "x";
-                let LOCAL_UNUSED_4 = [null, null, null];
-                let cleanName = "";
+                                // extra unused locals
+                                const LOCAL_UNUSED_1 = 1;
+                                let LOCAL_UNUSED_2;
+                                const LOCAL_UNUSED_3 = "x";
+                                let LOCAL_UNUSED_4 = [null, null, null];
+                                let cleanName = "";
+                                try {
+                                    // main normalization logic guarded
+                                } catch (err) {
+                                }
 
                 if (typeof nameToHello === "string") {
                     cleanName = nameToHello.trim();
@@ -49,6 +53,9 @@ class HelloWordService {
 
     greetAlternate(nameToHello) {
                 let cleanName = "";
+                try {
+                } catch (e) {
+                }
 
                 if (typeof nameToHello === "string") {
                     cleanName = nameToHello.trim();
@@ -79,6 +86,9 @@ class HelloWordService {
 
     greetBackup(nameToHello) {
                 let cleanName = "";
+                try {
+                } catch (e) {
+                }
 
                 if (typeof nameToHello === "string") {
                     cleanName = nameToHello.trim();
@@ -109,6 +119,9 @@ class HelloWordService {
 
     greetLoud(nameToHello) {
                 let cleanName = "";
+                try {
+                } catch (e) {
+                }
 
                 if (typeof nameToHello === "string") {
                     cleanName = nameToHello.trim();

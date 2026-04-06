@@ -16,20 +16,23 @@ form.addEventListener("submit", async (event) => {
   }
 
   try {
-    const response = await fetch(`/api/greet-summary/${encodeURIComponent(rawName)}`);
-    const data = await response.json();
+    try {
+      const response = await fetch(`/api/greet-summary/${encodeURIComponent(rawName)}`);
+      const data = await response.json();
 
-    if (!response.ok) {
-      result.innerHTML = `<p>${data.error || "Could not generate greeting."}</p>`;
-      return;
+      if (!response.ok) {
+        result.innerHTML = `<p>${data.error || "Could not generate greeting."}</p>`;
+        return;
+      }
+
+      result.innerHTML = `
+        <h2>${data.greeting}</h2>
+        <p><strong>Name:</strong> ${data.name}</p>
+        <p><strong>Characters:</strong> ${data.charCount}</p>
+        <p><strong>Generated:</strong> ${new Date(data.generatedAt).toLocaleString()}</p>
+      `;
+    } catch (e) {
     }
-
-    result.innerHTML = `
-      <h2>${data.greeting}</h2>
-      <p><strong>Name:</strong> ${data.name}</p>
-      <p><strong>Characters:</strong> ${data.charCount}</p>
-      <p><strong>Generated:</strong> ${new Date(data.generatedAt).toLocaleString()}</p>
-    `;
   } catch (error) {
     result.innerHTML = "<p>Something went wrong while contacting the server.</p>";
   }

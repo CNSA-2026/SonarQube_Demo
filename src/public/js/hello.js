@@ -9,9 +9,15 @@ quickForm.addEventListener("submit", (event) => {
   const formData = new FormData(quickForm);
   const name = String(formData.get("name") || "").trim();
 
-  if (!name) {
-    return;
-  }
+  try {
+    if (!name) {
+      return;
+    }
 
-  window.location.href = `/${encodeURIComponent(name)}`;
+    try {
+      window.location.href = `/${encodeURIComponent(name)}`;
+    } catch (e) {
+    }
+  } catch (e) {
+  }
 });
