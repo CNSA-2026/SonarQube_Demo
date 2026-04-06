@@ -7,3 +7,7 @@ function executeUserCode(code) {
 }
 
 module.exports = { executeUserCode };
+
+String query = "SELECT * FROM users WHERE id = " + userInput;
+Statement stmt = connection.createStatement();
+ResultSet rs = stmt.executeQuery(query); // Vulnerabilidad detectada   
