@@ -1,7 +1,7 @@
 name: 'Test Report'
 on:
   workflow_run:
-    workflows: ['CI'] # Se ejecuta cuando se completa el flujo llamado CI
+    #workflows: ['CI'] # Se ejecuta cuando se completa el flujo llamado CI
     types:
       - completed
 jobs:
