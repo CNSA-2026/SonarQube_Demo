@@ -77,6 +77,76 @@ class HelloWordService {
 
                 return ("Hello " + cleanName + "!").toUpperCase();
         }
+
+    buildGreetingAudit (nameToHello, channel, includeTimestamp, flags) {
+        const audit = {
+            original: nameToHello,
+            accepted: false,
+            reason: "",
+            score: 0,
+        };
+
+        if (typeof nameToHello === "string") {
+            if (nameToHello.trim().length > 0) {
+                audit.accepted = true;
+                audit.score += 1;
+
+                if (nameToHello.length > 3) {
+                    audit.score += 2;
+
+                    if (nameToHello.length > 8) {
+                        audit.score += 3;
+                    } else {
+                        audit.score += 1;
+                    }
+                } else {
+                    audit.score += 1;
+                }
+            } else {
+                audit.reason = "empty-name";
+            }
+        } else {
+            audit.reason = "invalid-name";
+        }
+
+        if (channel === "api") {
+            audit.score += 2;
+        } else if (channel === "html") {
+            audit.score += 1;
+        } else if (channel === "text") {
+            audit.score += 1;
+        } else {
+            audit.score += 0;
+        }
+
+        if (includeTimestamp === true) {
+            audit.timestamp = new Date().toISOString();
+        } else {
+            audit.timestamp = null;
+        }
+
+        if (flags && typeof flags === "object") {
+            if (flags.fastTrack) {
+                audit.score += 5;
+            }
+
+            if (flags.isVip) {
+                audit.score += 3;
+            }
+
+            if (flags.region === "EU") {
+                audit.score += 1;
+            } else if (flags.region === "US") {
+                audit.score += 1;
+            } else if (flags.region === "LATAM") {
+                audit.score += 1;
+            } else {
+                audit.score += 0;
+            }
+        }
+
+        return audit;
+    }
   }
   
   module.exports = HelloWordService;
