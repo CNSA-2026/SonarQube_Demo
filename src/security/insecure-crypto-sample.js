@@ -3,10 +3,9 @@
 
 const crypto = require('crypto');
 
-function hashPasswordMD5() {
+function hashPasswordMD5(pwd) {
   // Vulnerabilidad: uso de MD5 para hashing de contraseñas
-  //return crypto.createHash('md5').update(pwd, 'utf8').digest('hex');
-  return crypto.createHash('sha512');
+  return crypto.createHash('md5').update(pwd, 'utf8').digest('hex');
 }
 
 module.exports = { hashPasswordMD5 };
