@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Greeting Lab | Home</title>
+  <link rel="stylesheet" href="/public/css/theme.css" />
+</head>
+<body>
+  <main class="page shell">
+    <header class="hero">
+      <p class="eyebrow">Welcome</p>
+      <h1>Hello World, now with style</h1>
+      <p class="subtitle">This is your upgraded landing page with clear navigation and quick actions.</p>
+      <nav class="nav-row">
+        <a href="/views/dashboard">Dashboard</a>
+        <a href="/views/people">People</a>
+        <a href="/views/generator">Generator</a>
+      </nav>
+    </header>
+
+    <section class="panel">
+      <h2>Quick greet</h2>
+      <p>Write any name and jump directly to the classic greeting endpoint.</p>
+      <form id="quick-greet-form" class="form-row">
+        <label for="quick-name">Name</label>
+        <input id="quick-name" name="name" type="text" placeholder="e.g. Maria" required />
+        <button type="submit">Open Greeting</button>
+      </form>
+    </section>
+
+    <section class="grid cards">
+      <a class="card" href="/views/dashboard">
+        <h3>Explore views</h3>
+        <p>Navigate through the new visual sections.</p>
+      </a>
+      <a class="card" href="/api/people">
+        <h3>Check API</h3>
+        <p>See JSON data served by the backend.</p>
+      </a>
+      <a class="card" href="/John">
+        <h3>Classic hello</h3>
+        <p>Open the original route instantly.</p>
+      </a>
+    </section>
+  </main>
+
+  <script src="/public/js/hello.js"></script>
+</body>
+</html>

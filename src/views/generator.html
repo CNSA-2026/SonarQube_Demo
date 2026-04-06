@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Greeting Lab | Generator</title>
+  <link rel="stylesheet" href="/public/css/theme.css" />
+</head>
+<body>
+  <main class="page shell">
+    <header class="hero compact">
+      <p class="eyebrow">Generator</p>
+      <h1>Greeting Builder</h1>
+      <p class="subtitle">Create a greeting and inspect response metadata instantly.</p>
+      <nav class="nav-row">
+        <a href="/views/dashboard">Dashboard</a>
+        <a href="/views/people">People</a>
+      </nav>
+    </header>
+
+    <section class="panel">
+      <form id="greet-form" class="form-row">
+        <label for="name-input">Name</label>
+        <input id="name-input" name="name" type="text" placeholder="Type a name" required />
+        <button type="submit">Generate</button>
+      </form>
+      <article id="greet-result" class="result" aria-live="polite">
+        <p>Try a name to generate a greeting summary.</p>
+      </article>
+    </section>
+  </main>
+  <script src="/public/js/generator.js"></script>
+</body>
+</html>
