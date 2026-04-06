@@ -14,6 +14,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6.0.2
+        with:
+          # Disabling shallow clones is recommended for improving the relevancy of reporting
+          fetch-depth: 0
+      
 
       - name: Install dependencies
         run: npm install
@@ -42,3 +46,20 @@ jobs:
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}" 
           report-json: "./coverage/eslint-result.json" 
+
+      - name: Diagnose SonarQube connectivity
+        shell: bash
+        env:
+          SONAR_HOST_URL: http://sonarqube.cnsa-2026-dsa069.tech:9000
+        run: |
+          set -euo pipefail
+          apt-get update
+          apt-get install -y curl ca-certificates
+          echo "Checking ${SONAR_HOST_URL}/api/system/status"
+          curl --fail --show-error --silent --location "${SONAR_HOST_URL}/api/system/status"
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v7.1.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: http://sonarqube.cnsa-2026-dsa069.tech:9000
