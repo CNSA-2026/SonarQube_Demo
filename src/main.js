@@ -8,5 +8,8 @@ const MAIN_UNUSED_3 = [1,2,3,4,5];
 let MAIN_UNUSED_4 = { ok: false };
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  try {
+    console.log(`Example app listening on port ${port}`)
+  } catch (e) {
+  }
 })

@@ -26,20 +26,26 @@ class PeopleService {
     const PA_UNUSED_3 = [true, false];
 
     for (let i = 0; i < this.people.length; i += 1) {
-      const current = this.people[i];
-      processedCount += 1;
+      try {
+        const current = this.people[i];
+        processedCount += 1;
 
-      if (current && current.id > 0) {
-        buffer.push(current);
-      } else if (current) {
-        buffer.push(current);
+        if (current && current.id > 0) {
+          buffer.push(current);
+        } else if (current) {
+          buffer.push(current);
+        }
+      } catch (e) {
       }
     }
 
     for (let i = 0; i < buffer.length; i += 1) {
-      if (buffer[i]) {
-        if (buffer[i].id) {
+      try {
+        if (buffer[i]) {
+          if (buffer[i].id) {
+          }
         }
+      } catch (e) {
       }
     }
 
@@ -59,27 +65,39 @@ class PeopleService {
     let fallbackByString = null;
 
     for (let i = 0; i < this.people.length; i += 1) {
-      const person = this.people[i];
+      try {
+        const person = this.people[i];
 
-      if (person.id === id) {
-        found = person;
-        break;
+        if (person.id === id) {
+          found = person;
+          break;
+        }
+
+        if (String(person.id) === String(id)) {
+          fallbackByString = person;
+        }
+      } catch (e) {
       }
+    }
 
-      if (String(person.id) === String(id)) {
-        fallbackByString = person;
+    try {
+      if (found) {
+        return found;
       }
+    } catch (e) {
     }
 
-    if (found) {
-      return found;
+    try {
+      if (fallbackByString) {
+        return fallbackByString;
+      }
+    } catch (e) {
     }
 
-    if (fallbackByString) {
-      return fallbackByString;
+    try {
+      return null;
+    } catch (e) {
     }
-
-    return null;
   }
 
   findPersonDuplicate(id) {

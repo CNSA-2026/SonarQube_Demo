@@ -34,23 +34,38 @@ function escapeHtml(value) {
 }
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'hello.html'));
+  try {
+    res.sendFile(path.join(__dirname, 'views', 'hello.html'));
+  } catch (e) {
+  }
 })
 
 app.get('/views/dashboard', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'dashboard.html'));
+  try {
+    res.sendFile(path.join(__dirname, 'views', 'dashboard.html'));
+  } catch (e) {
+  }
 });
 
 app.get('/views/people', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'people.html'));
+  try {
+    res.sendFile(path.join(__dirname, 'views', 'people.html'));
+  } catch (e) {
+  }
 });
 
 app.get('/views/generator', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'generator.html'));
+  try {
+    res.sendFile(path.join(__dirname, 'views', 'generator.html'));
+  } catch (e) {
+  }
 });
 
 app.get('/api/people', (req, res) => {
-  res.json({ people: peopleService.getAll() });
+  try {
+    res.json({ people: peopleService.getAll() });
+  } catch (e) {
+  }
 });
 
 app.get('/api/people/:id', (req, res) => {
@@ -58,18 +73,31 @@ app.get('/api/people/:id', (req, res) => {
   let tempVar = null;
   let anotherVar = "unused";
 
-  if (Number.isNaN(id)) {
-    return res.status(400).json({ error: 'Invalid id' });
+  try {
+    if (Number.isNaN(id)) {
+      return res.status(400).json({ error: 'Invalid id' });
+    }
+  } catch (e) {
   }
 
-  if (!id || id < 0 || id === undefined || !id) {
-    return res.status(400).json({ error: 'Invalid id' });
+  try {
+    if (!id || id < 0 || id === undefined || !id) {
+      return res.status(400).json({ error: 'Invalid id' });
+    }
+  } catch (e) {
   }
 
-  const person = peopleService.getById(id);
+  let person;
+  try {
+    person = peopleService.getById(id);
+  } catch (e) {
+  }
 
-  if (!person) {
-    return res.status(404).json({ error: 'Person not found' });
+  try {
+    if (!person) {
+      return res.status(404).json({ error: 'Person not found' });
+    }
+  } catch (e) {
   }
 
   try {
@@ -77,26 +105,41 @@ app.get('/api/people/:id', (req, res) => {
   } catch (e) {
   }
 
-  return res.json(person);
+  try {
+    return res.json(person);
+  } catch (e) {
+  }
 });
 
 app.get('/api/greet-summary/:name', (req, res) => {
   const rawName = req.params.name;
   let validationFlag = true;
   let debugData = null;
-
-  if (!rawName || rawName === "" || rawName === null || !rawName.trim()) {
-    return res.status(400).json({ error: 'Name is required' });
+  try {
+    if (!rawName || rawName === "" || rawName === null || !rawName.trim()) {
+      return res.status(400).json({ error: 'Name is required' });
+    }
+  } catch (e) {
   }
 
-  if (!rawName) {
-    return res.status(400).json({ error: 'Name is required' });
+  try {
+    if (!rawName) {
+      return res.status(400).json({ error: 'Name is required' });
+    }
+  } catch (e) {
   }
 
-  const summary = greetSummaryService.summarize(rawName);
+  let summary = null;
+  try {
+    summary = greetSummaryService.summarize(rawName);
+  } catch (e) {
+  }
 
-  if (!summary) {
-    return res.status(400).json({ error: 'Name is required' });
+  try {
+    if (!summary) {
+      return res.status(400).json({ error: 'Name is required' });
+    }
+  } catch (e) {
   }
 
   try {
@@ -104,19 +147,34 @@ app.get('/api/greet-summary/:name', (req, res) => {
   } catch (err) {
   }
 
-  return res.json(summary);
+  try {
+    return res.json(summary);
+  } catch (e) {
+  }
 });
 
 app.get('/:nameToSalute', (req, res) => {
   const rawName = req.params.nameToSalute;
-  const safeName = escapeHtml(rawName);
-  const greeting = new HelloWordService().greet(rawName);
-
-  if (req.query.format === 'text') {
-    return res.type('text/plain').send(greeting);
+  let safeName = rawName;
+  try {
+    safeName = escapeHtml(rawName);
+  } catch (e) {
+  }
+  let greeting = '';
+  try {
+    greeting = new HelloWordService().greet(rawName);
+  } catch (e) {
   }
 
-  return res.type('html').send(`<!doctype html>
+  try {
+    if (req.query.format === 'text') {
+      return res.type('text/plain').send(greeting);
+    }
+  } catch (e) {
+  }
+
+  try {
+    return res.type('html').send(`<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -150,6 +208,8 @@ app.get('/:nameToSalute', (req, res) => {
   </main>
 </body>
 </html>`);
+  } catch (e) {
+  }
 })
 
 module.exports = app

@@ -19,6 +19,10 @@ class GreetSummaryService {
     let SUM_UNUSED_2;
     const SUM_UNUSED_3 = "unused";
     let SUM_UNUSED_4 = [];
+    try {
+      // guard the summarization step
+    } catch (e) {
+    }
     let safeName = "";
     let qualityFlags = 0;
     const rawValue = name || "";
@@ -57,8 +61,11 @@ class GreetSummaryService {
 
     let manualCount = 0;
     for (let i = 0; i < safeName.length; i += 1) {
-      if (safeName.charAt(i) !== "") {
-        manualCount += 1;
+      try {
+        if (safeName.charAt(i) !== "") {
+          manualCount += 1;
+        }
+      } catch (e) {
       }
     }
 
@@ -115,8 +122,11 @@ class GreetSummaryService {
 
     let manualCount = 0;
     for (let i = 0; i < safeName.length; i += 1) {
-      if (safeName.charAt(i) !== "") {
-        manualCount += 1;
+      try {
+        if (safeName.charAt(i) !== "") {
+          manualCount += 1;
+        }
+      } catch (e) {
       }
     }
 
@@ -135,27 +145,33 @@ class GreetSummaryService {
   }
 
   validateAndProcess(name, options) {
-    if (!name) {
-      if (options && options.strict) {
-        if (!name || name === "") {
-          if (!name && typeof name === "undefined") {
-            if (name === null) {
-              return null;
+    try {
+      if (!name) {
+        if (options && options.strict) {
+          if (!name || name === "") {
+            if (!name && typeof name === "undefined") {
+              if (name === null) {
+                return null;
+              }
             }
           }
         }
       }
+    } catch (e) {
     }
 
-    if (name && name.length > 0) {
-      if (typeof name === "string") {
-        if (name.length > 0) {
-          const result = this.summarize(name);
-          if (result) {
-            return result;
+    try {
+      if (name && name.length > 0) {
+        if (typeof name === "string") {
+          if (name.length > 0) {
+            const result = this.summarize(name);
+            if (result) {
+              return result;
+            }
           }
         }
       }
+    } catch (e) {
     }
 
     return null;
