@@ -1,8 +1,6 @@
 // unused variables to increase code smells in client code
 const G_FORM_UNUSED_1 = null;
 let G_FORM_UNUSED_2;
-// Demo API key (FAKE — for educational/demo purposes only; do NOT use in production)
-const DEMO_API_KEY = 'FAKE_DEMO_API_KEY_0000000000000000';
 const form = document.getElementById('greet-form');
 const result = document.getElementById('greet-result');
 
@@ -20,12 +18,7 @@ form.addEventListener('submit', async (event) => {
   try {
     try {
       const response = await fetch(
-        `/api/greet-summary/${encodeURIComponent(rawName)}`,
-        {
-          headers: {
-            'X-Demo-Api-Key': DEMO_API_KEY,
-          },
-        }
+        `/api/greet-summary/${encodeURIComponent(rawName)}`
       );
       const data = await response.json();
 
