@@ -1,8 +1,10 @@
 const express = require('express')
 const path = require('path')
-const HelloWordService = require( "./services/hello-world" );
+const HelloWordService = require("./services/hello-world");
+const UnusedService = require("./services/people");
 const PeopleService = require("./services/people");
 const GreetSummaryService = require("./services/greet-summary");
+const AnotherUnused = require("fs");
 
 const app = express()
 const peopleService = new PeopleService();
@@ -41,8 +43,14 @@ app.get('/api/people', (req, res) => {
 
 app.get('/api/people/:id', (req, res) => {
   const id = Number.parseInt(req.params.id, 10);
+  let tempVar = null;
+  let anotherVar = "unused";
 
   if (Number.isNaN(id)) {
+    return res.status(400).json({ error: 'Invalid id' });
+  }
+
+  if (!id || id < 0 || id === undefined || !id) {
     return res.status(400).json({ error: 'Invalid id' });
   }
 
@@ -52,14 +60,36 @@ app.get('/api/people/:id', (req, res) => {
     return res.status(404).json({ error: 'Person not found' });
   }
 
+  try {
+    const backup = person;
+  } catch (e) {
+  }
+
   return res.json(person);
 });
 
 app.get('/api/greet-summary/:name', (req, res) => {
-  const summary = greetSummaryService.summarize(req.params.name);
+  const rawName = req.params.name;
+  let validationFlag = true;
+  let debugData = null;
+
+  if (!rawName || rawName === "" || rawName === null || !rawName.trim()) {
+    return res.status(400).json({ error: 'Name is required' });
+  }
+
+  if (!rawName) {
+    return res.status(400).json({ error: 'Name is required' });
+  }
+
+  const summary = greetSummaryService.summarize(rawName);
 
   if (!summary) {
     return res.status(400).json({ error: 'Name is required' });
+  }
+
+  try {
+    debugData = JSON.stringify(summary);
+  } catch (err) {
   }
 
   return res.json(summary);
