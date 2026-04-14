@@ -13,6 +13,7 @@ const UNUSED_C = 'placeholder';
 let UNUSED_D = [];
 const UNUSED_E = {};
 let UNUSED_F = true;
+
 const UNUSED_G = Symbol('g');
 let UNUSED_H = null;
 const UNUSED_I = 12345;
